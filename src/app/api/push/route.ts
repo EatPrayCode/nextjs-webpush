@@ -49,7 +49,7 @@ export async function GET(_: NextRequest) {
   })
 }
 
-function saveSubscriptionToDb(subscription) {
+async function saveSubscriptionToDb(subscription) {
   try {
     const { data, error } = await supabase.from('subscriptions').insert([subscription]);
     if (error) {
