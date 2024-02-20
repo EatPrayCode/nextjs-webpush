@@ -33,6 +33,24 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({ message: 'success', updatedDb })
 }
 
+// Middleware function to handle CORS
+const handleCors = (request: NextRequest) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*', // Set appropriate origin
+    'Access-Control-Allow-Methods': 'GET, POST', // Allow GET and POST methods
+    'Access-Control-Allow-Headers': 'Content-Type', // Allow Content-Type header
+  };
+
+  if (request.method === 'OPTIONS') {
+    // Preflight request, respond with headers only
+    return new Response(null, { headers });
+  }
+
+  // Continue to the next handler
+  return request;
+};
+
+
 export async function GET(_: NextRequest) {
   const subscriptions = await getSubscriptionsFromDb1()
 
@@ -82,3 +100,5 @@ async function getSubscriptionsFromDb1() {
     throw error;
   }
 }
+
+export default handleCors;
