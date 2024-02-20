@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 import {
-  // getSubscriptionsFromDb,
-  // saveSubscriptionToDb,
+  getSubscriptionsFromDb,
+  saveSubscriptionToDb,
 } from '@/utils/db/in-memory-db'
 import webpush, { PushSubscription } from 'web-push'
 import { CONFIG } from '@/config'
@@ -49,7 +49,7 @@ export async function GET(_: NextRequest) {
   })
 }
 
-async function saveSubscriptionToDb(subscription:any) {
+async function saveSubscriptionToDb1(subscription:any) {
   try {
     const { data, error } = await supabase.from('subscriptions').insert([subscription]);
     if (error) {
@@ -62,7 +62,7 @@ async function saveSubscriptionToDb(subscription:any) {
   }
 }
 
-async function getSubscriptionsFromDb() {
+async function getSubscriptionsFromDb1() {
   try {
     const { data, error } = await supabase.from('subscriptions').select('*');
     if (error) {
