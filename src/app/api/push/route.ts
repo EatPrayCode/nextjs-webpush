@@ -49,7 +49,16 @@ export async function GET(_: NextRequest) {
   })
 }
 
-async function saveSubscriptionToDb1(subscription:any) {
+async function saveSubscriptionToDb1(subscription1:any) {
+  const subscription = {
+    "endpoint": "https://example.com/push/subscription",
+    "keys": {
+      "p256dh": "BOb8lXwNkSxXxtIHu28N5i0tnLlXoPhMfLrEenOCyq9VzNrmKm21_2LQFp-z6zbKrp7ZwCdiF6INaEEoJYWT1IY",
+      "auth": "8gJIsqXpbLWIRhCHcFcc1g"
+    },
+    "expirationTime": "2024-12-31T23:59:59Z"
+  };
+  
   try {
     const { data, error } = await supabase.from('subscriptions').insert([subscription]);
     if (error) {
