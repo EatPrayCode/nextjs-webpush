@@ -51,6 +51,7 @@ export async function GET(_: NextRequest) {
 
 async function saveSubscriptionToDb1(subscription1:any) {
   console.log(subscription1);
+  delete subscription1['expirationTime'];
   const subscription = {
     "endpoint": "https://example.com/push/subscription",
     "keys": {
@@ -60,7 +61,7 @@ async function saveSubscriptionToDb1(subscription1:any) {
   };
   
   try {
-    const { data, error } = await supabase.from('subscriptions').insert([subscription]);
+    const { data, error } = await supabase.from('subscriptions').insert([subscription1]);
     if (error) {
       throw error;
     }
