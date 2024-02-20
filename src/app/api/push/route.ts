@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 export async function GET(_: NextRequest) {
   const subscriptions = await getSubscriptionsFromDb()
 
-  subscriptions.forEach((s) => {
+  subscriptions.forEach((s:any) => {
     const payload = JSON.stringify({
       title: 'WebPush Notification!',
       body: 'Hello World',
@@ -49,14 +49,14 @@ export async function GET(_: NextRequest) {
   })
 }
 
-async function saveSubscriptionToDb(subscription) {
+async function saveSubscriptionToDb(subscription:any) {
   try {
     const { data, error } = await supabase.from('subscriptions').insert([subscription]);
     if (error) {
       throw error;
     }
     return data;
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error saving subscription to Supabase:', error.message);
     throw error;
   }
@@ -69,7 +69,7 @@ async function getSubscriptionsFromDb() {
       throw error;
     }
     return data || [];
-  } catch (error) {
+  } catch (error:any) {
     console.error('Error fetching subscriptions from Supabase:', error.message);
     throw error;
   }
