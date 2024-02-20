@@ -28,13 +28,13 @@ export async function POST(request: NextRequest) {
     return
   }
 
-  const updatedDb = await saveSubscriptionToDb(subscription)
+  const updatedDb = await saveSubscriptionToDb1(subscription)
 
   return NextResponse.json({ message: 'success', updatedDb })
 }
 
 export async function GET(_: NextRequest) {
-  const subscriptions = await getSubscriptionsFromDb()
+  const subscriptions = await getSubscriptionsFromDb1()
 
   subscriptions.forEach((s:any) => {
     const payload = JSON.stringify({
